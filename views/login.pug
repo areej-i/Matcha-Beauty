@@ -1,0 +1,110 @@
+doctype html
+
+head
+  
+  meta(charset='utf-8')
+  script(src='connect4.js')
+  style.
+    body{
+    font-size: 20px;
+    color: black;
+    background-color: rgb(113 170 77 / 46%);
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 47%;
+    left: 51%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    }
+
+    button {
+    width: 150px;
+    padding: 0.4rem 1.25rem;
+    font-size: 1.3rem;
+    height: 50px;
+    margin: 4px;
+    }
+
+    input[type=text]{
+    height:40px; 
+    padding: 3px 20px; 
+    font-family: 'Poppins', sans-serif;
+    width:300px; 
+    border-radius: 10rem;
+    border-color: transparent;
+    font-size:80%;
+    }
+    .button {
+    display: inline-block;
+    border-radius: 10rem;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-transform: lowercase;
+    letter-spacing: 0.14rem; 
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border-color: transparent;
+    border-width: 1px;
+    }
+
+    .button:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(227 158 188);
+    border-radius: 10rem;
+    border-color: transparent;
+    z-index: -2;
+    }
+
+    .button:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    border-color: transparent;
+    height: 100%;
+    background-color: #d66578;
+    transition: all 0.3s;
+    border-radius: 10rem;
+    z-index: -1;
+    }
+
+    .button:hover {
+        color: #fff;
+    }
+    .button:hover:before {
+        width: 100%;
+    }
+
+  title Matcha Beauty
+
+  body
+
+    h1 Log in
+
+    form(action='/loginUser' method='POST')
+      label(for="username") 
+        strong Username
+      br
+      input(type='text' placeholder='Enter Username' name='username' required='')
+      br
+      br
+      label(for="password")
+        strong Password
+      br
+      input(type='text' placeholder='Enter Password' name='password' required='')
+      br
+      br
+      button#login(class="button" style='cursor:pointer') Login
+      button#cancel(class="button" style='cursor:pointer' onclick="location.href = 'home';") Cancel
+      

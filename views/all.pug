@@ -1,0 +1,123 @@
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA Compatible" content="IE=edge")
+    link(rel="stylesheet" href="./matcha.css")
+    script(src="/connect4.js")
+    title Matcha Beauty
+ 
+  body(style='background: rgb(170,207,178); background: linear-gradient(0deg, rgba(170,207,178,1) 14%, rgba(252,175,201,1) 100%);')
+    form(action='/loginUser' method='POST') 
+      #sidenav1
+        input#ham-menu(type='checkbox')
+        label(for='ham-menu')
+          .hide-des
+            span.menu-line
+            span.menu-line
+            span.menu-line
+            span.menu-line
+            span.menu-line
+            span.menu-line
+        .full-page-green
+        .ham-menu
+          ul.centre-text.bold-text
+            li
+              a(onclick="location.href = '../eyes';") eyes
+            li
+              a(onclick="location.href = '../lips';") lips
+            li
+              a(onclick="location.href = '../face';") face
+            li
+              a(href='about.asp') bestselling
+            li
+              a(href='about.asp') support
+            li 
+              a(href='about.asp') contact
+
+      #header(style='background-color: white; height: 160px')
+
+        .headTitle
+          li
+            a(onclick="location.href = '../home';") Matcha Beauty
+          #main
+            img(src='/icon-search.svg' alt='magnifying glass' style='width:2%;margin-left: 27%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+            img(src='/icon-account.svg' alt='person icon' style='width:2%;margin-left: 2%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+            img(src='/icon-bag.svg' onclick="openNav()" alt='bag icon' style='width:2%;margin-left: 2%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+
+          #mySidebar.sidebar
+            a.closebtn(href='javascript:void(0)' onclick='closeNav()') &times;
+            label(style='margin-left: 30%; letter-spacing: 0.15em; top: 20px; font-size: 24px; font-weight: bold; color: black; font-family: "OpenSansCondensed-Light", sans-serif;') Shopping bag
+            .cart-row
+              span.cart-item.cart-header.cart-column ITEM
+              span.cart-price.cart-header.cart-column PRICE
+              span.cart-quantity.cart-header.cart-column QUANTITY
+            .cart-items
+            .cart-total
+              strong.cart-total-title Total
+              span.cart-total-price $0
+            button.btn.btn-primary.btn-purchase(type='button') PURCHASE
+          
+        ul
+          li
+            a(style='cursor:pointer' onclick="location.href = '../all';") all
+          li
+            a(style='cursor:pointer' onclick="location.href = '../eyes';") eyes
+          li
+            a(style='cursor:pointer' onclick="location.href = '../lips';") lips
+          li
+            a(style='cursor:pointer' onclick="location.href = '../face';") face
+          li
+            a(style='cursor:pointer' onclick="location.href = '../bestselling';") bestselling
+
+
+      #main-containor(style='font-size: 30px; overflow: hidden')
+        article.listing
+          .shop-item(style='width:290px; margin-left:2%; margin-top: 2%; height: 404px; float:left')
+            .image 
+              img.shop-item-image(src='/'+session.image[0] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+            .content(style='text-align:center;')
+              label#name(style='font-weight: 600') !{session.names[0]}
+              label#brand !{session.brand[0]}
+              label#price $!{session.price[0]}
+            .action 
+              button#addToCart(type='button' onclick='bag('+session.pid[0]+','+session.names[0]+')' style='font-size: 20px; margin-left: 35%') add to cart
+
+          .shop-item(style='width:290px; margin-left:4%; height: 404px; margin-top: 2%; float:left')
+            .image 
+              img.shop-item-image(src='/'+session.image[1] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+            .content(style='text-align:center;')
+              label#name(style='font-weight: 600') !{session.names[1]}
+              label#brand !{session.brand[1]}
+              label#price $!{session.price[1]}
+            .action 
+              button#addToCart(type='button' onclick='bag('+session.pid[1]+','+session.names[1]+')' style='font-size: 20px; margin-left: 35%') add to cart
+
+          .shop-item(style='width:290px; margin-left:4%; height: 404px; margin-top: 2%; float:left')
+            .image
+              img.shop-item-image(src='/'+session.image[2] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+            .content(style='text-align:center;')
+              label#name(style='font-weight: 600') !{session.names[2]}
+              label#brand !{session.brand[2]}
+              label#price $!{session.price[2]}
+            .action 
+              button#addToCart(type='button' onclick='bag('+session.pid[2]+','+session.names[2]+')' style='font-size: 20px; margin-left: 35%') add to cart
+
+          .shop-item(style='width:290px; margin-left:4%; height: 404px; margin-top: 2%; float:left')
+            .image 
+              img.shop-item-image(src='/'+session.image[3] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+            .content(style='text-align:center;')
+              label#name(style='font-weight: 600') !{session.names[3]}
+              label#brand !{session.brand[3]}
+              label#price $!{session.price[3]}
+            .action 
+              button#addToCart(type='button' onclick='bag('+session.pid[3]+','+session.names[3]+')' style='font-size: 20px; margin-left: 35%') add to cart
+
+          .shop-item(style='width:290px; margin-left:2%; height: 404px; margin-top: 2%; float:left')
+            .image 
+              img.shop-item-image(src='/'+session.image[4] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+            .content(style='text-align:center;')
+              label#name(style='font-weight: 600') !{session.names[4]}
+              label#brand !{session.brand[4]}
+              label#price $!{session.price[4]}
+            .action 
+              button#addToCart(type='button' onclick='bag('+session.pid[4]+','+session.names[4]+')' style='font-size: 20px; margin-left: 35%') add to cart

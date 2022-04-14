@@ -1,0 +1,113 @@
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA Compatible" content="IE=edge")
+    link(rel="stylesheet" href="./matcha.css")
+    script(src="/connect4.js")
+    title Matcha Beauty
+    style.
+      .dropdown {
+      position: relative;
+      display: inline-block;
+      }
+      .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      }
+      .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      }
+      .dropdown-content a:hover {
+      background-color: #f1f1f1
+      }
+      .dropdown:hover .dropdown-content {
+      display: block;
+      }
+      .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+      }
+  body(onload="displayBag();" style='background: rgb(171,195,160);background: linear-gradient(0deg, rgba(171,195,160,1) 43%, rgba(252,175,195,1) 100%);')
+    #sidenav1
+      input#ham-menu(type='checkbox')
+      label(for='ham-menu')
+        .hide-des
+          span.menu-line
+          span.menu-line
+          span.menu-line
+          span.menu-line
+          span.menu-line
+          span.menu-line
+      .full-page-green
+      .ham-menu
+        ul.centre-text.bold-text
+          li
+            a(onclick="location.href = '../eyes';") eyes
+          li
+            a(onclick="location.href = '../lips';") lips
+          li
+            a(onclick="location.href = '../face';") face
+          li
+            a(onclick="location.href = '../bestselling';") bestselling
+          li
+            a(onclick="location.href = '../account';") my account
+          li
+            a(href='about.asp') support
+          li 
+            a(href='about.asp') contact
+
+    #header(style='background-color: white; height: 160px')
+
+      .headTitle
+        li
+          a(onclick="location.href = '../home';") Matcha Beauty
+        #main
+          img(src='/icon-search.svg' alt='magnifying glass' style='width:2%;margin-left: 27%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+          .dropdown(style='width:2%;margin-left: 2%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+            img(src='/icon-account.svg' alt='person icon' style='margin-bottom: 12;')
+            .dropdown-content(style='font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;')
+              if (session.loggedin == true)
+                a(onclick="location.href = 'account';") my account
+                a(onclick="location.href = 'account';") log out
+              else
+                a(onclick="location.href = 'login';") login
+                a(onclick="location.href = 'register';") sign up
+          img(src='/icon-bag.svg' onclick="openNav()" alt='bag icon' style='width:2%;margin-left: 2%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+
+        #mySidebar.sidebar
+          .full-page-green
+          a.closebtn(href='javascript:void(0)' onclick='closeNav()') &times;
+          label(style='margin-left: 30%; letter-spacing: 0.15em; top: 20px; font-size: 24px; font-weight: bold; color: black; font-family: "OpenSansCondensed-Light", sans-serif;') Shopping bag
+          br
+          button(class="button" style='cursor:pointer;' onclick="location.href = '../checkOut';") check out
+
+      ul
+        li
+          a(style='cursor:pointer' onclick="location.href = '../all';") all
+        li
+          a(style='cursor:pointer' onmouseover='/getEyes' onclick="location.href = '../eyes';") eyes
+        li
+          a(style='cursor:pointer' onclick="location.href = '../lips';") lips
+        li
+          a(style='cursor:pointer' onclick="location.href = '../face';") face
+        li
+          a(style='cursor:pointer' onclick="location.href = '../bestselling';") bestselling
+
+    #main-containor
+      .content
+        h2.text_shadows shop now
+      img(src='/IMG_4765.jpg' alt='makeup' style='margin-left: 4%; margin-top: 0%; margin-bottom: 10%; width: 418px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+      img(src='/IMG_4763.jpg' alt='makeup' style='margin-left: 1%; margin-top: 2%; margin-bottom: 10%; width: 452px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+      img(src='/IMG_4766.jpg' alt='makeup' style='margin-left: 1%; margin-top: 0%; margin-bottom: 10%; width: 420px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+      
+      
+
+    //- .tool
+    //-   button#login.button(class="button" style='cursor:pointer' onclick="location.href = 'login';") Login
+    //-   button#register.button(class="button" style='cursor:pointer' onclick="location.href = 'register';") Sign up

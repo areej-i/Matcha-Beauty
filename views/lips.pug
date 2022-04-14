@@ -1,0 +1,63 @@
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA Compatible" content="IE=edge")
+    link(rel="stylesheet" href="./matcha.css")
+    script(src="/connect4.js")
+    title Matcha Beauty
+    
+  body(style='background: rgb(170,207,178); background: linear-gradient(0deg, rgba(170,207,178,1) 14%, rgba(252,175,201,1) 100%);')
+    #sidenav1
+      input#ham-menu(type='checkbox')
+      label(for='ham-menu')
+        .hide-des
+          span.menu-line
+          span.menu-line
+          span.menu-line
+          span.menu-line
+          span.menu-line
+          span.menu-line
+      .full-page-green
+      .ham-menu
+        ul.centre-text.bold-text
+          li
+            a(onclick="location.href = '../eyes';") eyes
+          li
+            a(onclick="location.href = '../lips';") lips
+          li
+            a(onclick="location.href = '../face';") face
+          li
+            a(href='about.asp') bestselling
+          li
+            a(href='about.asp') support
+          li 
+            a(href='about.asp') contact
+
+    #header(style='background-color: white; height: 160px')
+
+      .headTitle
+        li
+          a(onclick="location.href = '../home';") Matcha Beauty
+        #main
+          img(src='/icon-search.svg' alt='magnifying glass' style='width:2%;margin-left: 27%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+          img(src='/icon-account.svg' alt='person icon' style='width:2%;margin-left: 2%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+          img(src='/icon-bag.svg' onclick="openNav()" alt='bag icon' style='width:2%;margin-left: 2%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+
+        #mySidebar.sidebar
+          a.closebtn(href='javascript:void(0)' onclick='closeNav()') &times;
+          label(style='margin-left: 35%; top: 20px; font-size: 20px; font-weight: bold; color: black; font-family: "OpenSansCondensed-Light", sans-serif;') Shopping bag
+        
+      ul
+        li
+          a(style='cursor:pointer' onclick="location.href = '../all';") all
+        li
+          a(style='cursor:pointer' onclick="location.href = '../eyes';") eyes
+        li
+          a(style='cursor:pointer' onclick="location.href = '../lips';") lips
+        li
+          a(style='cursor:pointer' onclick="location.href = '../face';") face
+        li
+          a(style='cursor:pointer' onclick="location.href = '../bestselling';") bestselling
+
+    #content-containor 
+    
