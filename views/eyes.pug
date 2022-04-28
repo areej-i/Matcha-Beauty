@@ -5,56 +5,6 @@ html(lang="en")
     link(rel="stylesheet" href="./matcha.css")
     script(src="/connect4.js")
     title Matcha Beauty
-    style.
-      .dropdown {
-      position: relative;
-      display: inline-block;
-      }
-      .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      }
-      .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      }
-      .dropdown-content a:hover {
-      background-color: #f1f1f1
-      }
-      .dropdown:hover .dropdown-content {
-      display: block;
-      }
-      .dropdown:hover .dropbtn {
-      background-color: #3e8e41;
-      }
-      #addToCart{
-        font-size: 20px; 
-        width: 123px; 
-        height: 33px; 
-        margin-left: 25%;
-      }
-      .favContainer{
-        position: relative;
-        display: inline-block;
-        margin-left: 40;
-        margin-bottom: 20;
-      }
-      .favContainer .imgBlack {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 99;
-      }
-      .favContainer:hover .imgBlack {
-        display: inline;
-      }
   body(style='background: rgb(170,207,178); background: linear-gradient(0deg, rgba(170,207,178,1) 14%, rgba(252,175,201,1) 100%);')
     form(action='/loginUser' method='POST') 
       #sidenav1
@@ -130,11 +80,11 @@ html(lang="en")
 
 
       #main-containor(style='font-size: 30px; overflow: hidden')
-        h1(style='text-align: center; color: #8cbd98; margin-top: 1%') Eyes 
+        h1(style='text-align: center; color: #8cbd98; margin-top: 1%; text-shadow: 1px 1px 2px #b25c77ab;') Eyes 
         article.listing
-          .shop-item(style='width:290px; margin-left:2%; margin-top: 3%; height: 404px; float:left')
+          .shop-item(style='margin-left:2%; margin-top: 3%; float:left')
             .image 
-              img.shop-item-image(src='/'+session.image[0] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+              img.shop-item-image(src='/'+session.image[0] alt='makeup')
             .content(style='text-align:center;')
               label#name(style='font-weight: 600') !{session.names[0]}
               label#brand !{session.brand[0]}
@@ -149,9 +99,9 @@ html(lang="en")
                   img(src='white_heart.png' onclick='addToFavs()' style='width:30; cursor: pointer; position: absolute; margin-left: 3%')
                   img.imgBlack(src='black_heart.png' onclick='addToFavs()' style='width:30; cursor: pointer; position: absolute; margin-left: 3%')
 
-          .shop-item(style='width:290px; margin-left:4%; height: 404px; margin-top: 3%; float:left')
+          .shop-item(style='margin-left:4%;margin-top: 3%;')
             .image 
-              img.shop-item-image(src='/'+session.image[1] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+              img.shop-item-image(src='/'+session.image[1] alt='makeup')
             .content(style='text-align:center;')
               label#name(style='font-weight: 600') !{session.names[1]}
               label#brand !{session.brand[1]}
@@ -160,12 +110,12 @@ html(lang="en")
               if (session.quantity[1] == 0)
                 button#addToCart(type='button' ) SOLD OUT
               else
-                button#addToCart(type='button' onclick='bag('+session.pid[1]+','+session.names[1]+')' style='font-size: 20px; width: 123px; height: 33px; cursor:pointer; margin-left: 30%') add to cart
+                button#addToCart(type='button' onclick='bag('+session.pid[1]+','+session.names[1]+')') add to cart
               img(src='white_heart.png' style='width:30; position: absolute; margin-left: 3%')
 
-          .shop-item(style='width:290px; margin-left:4%; height: 404px; margin-top: 3%; float:left')
+          .shop-item(style='margin-left:4%; margin-top: 3%;')
             .image
-              img.shop-item-image(src='/'+session.image[2] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+              img.shop-item-image(src='/'+session.image[2] alt='makeup')
             .content(style='text-align:center;')
               label#name(style='font-weight: 600') !{session.names[2]}
               label#brand !{session.brand[2]}
@@ -174,12 +124,12 @@ html(lang="en")
               if (session.quantity[2] == 0)
                 button#addToCart(type='button' ) SOLD OUT
               else
-                button#addToCart(type='button' onclick='bag('+session.pid[2]+','+session.names[2]+')' style='font-size: 20px; width: 123px; height: 33px; cursor:pointer; margin-left: 30%') add to cart
+                button#addToCart(type='button' onclick='bag('+session.pid[2]+','+session.names[2]+')') add to cart
               img(src='white_heart.png' style='width:30; position: absolute; margin-left: 3%')
 
-          .shop-item(style='width:290px; margin-left:4%; height: 404px; margin-top: 3%; float:left')
+          .shop-item(style='margin-left:4%; margin-top: 3%')
             .image 
-              img.shop-item-image(src='/'+session.image[3] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+              img.shop-item-image(src='/'+session.image[3] alt='makeup')
             .content(style='text-align:center;')
               label#name(style='font-weight: 600') !{session.names[3]}
               label#brand !{session.brand[3]}
@@ -188,12 +138,12 @@ html(lang="en")
               if (session.quantity[3] == 0)
                 button#addToCart(type='button' ) SOLD OUT
               else
-                button#addToCart(type='button' onclick='bag('+session.pid[3]+','+session.names[3]+')' style='font-size: 20px; width: 123px; height: 33px; cursor:pointer; margin-left: 30%') add to cart
+                button#addToCart(type='button' onclick='bag('+session.pid[3]+','+session.names[3]+')') add to cart
               img(src='white_heart.png' style='width:30; position: absolute; margin-left: 3%')
 
-          .shop-item(style='width:290px; margin-left:2%; height: 404px; margin-top: 2%; float:left')
+          .shop-item(style='margin-left:2%; margin-top: 2%; ')
             .image 
-              img.shop-item-image(src='/'+session.image[4] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+              img.shop-item-image(src='/'+session.image[4] alt='makeup')
             .content(style='text-align:center;')
               label#name(style='font-weight: 600') !{session.names[4]}
               label#brand !{session.brand[4]}
@@ -202,12 +152,12 @@ html(lang="en")
               if (session.quantity[4] == 0)
                 button#addToCart(type='button' ) SOLD OUT
               else
-                button#addToCart(type='button' onclick='bag('+session.pid[4]+','+session.names[4]+')' style='font-size: 20px; width: 123px; height: 33px; cursor:pointer; margin-left: 30%') add to cart
+                button#addToCart(type='button' onclick='bag('+session.pid[4]+','+session.names[4]+')') add to cart
               img(src='white_heart.png' style='width:30; position: absolute; margin-left: 3%')
 
-          .shop-item(style='width:290px; margin-left:4%; height: 404px; margin-top: 2%; float:left')
+          .shop-item(style='margin-left:4%; margin-top: 2%;')
             .image 
-              img.shop-item-image(src='/'+session.image[5] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+              img.shop-item-image(src='/'+session.image[5] alt='makeup')
             .content(style='text-align:center;')
               label#name(style='font-weight: 600') !{session.names[5]}
               label#brand !{session.brand[5]}
@@ -216,12 +166,12 @@ html(lang="en")
               if (session.quantity[5] == 0)
                 button#addToCart(type='button' ) SOLD OUT
               else
-                button#addToCart(type='button' onclick='bag('+session.pid[5]+','+session.names[5]+')' style='font-size: 20px; width: 123px; height: 33px; cursor:pointer; margin-left: 30%') add to cart
+                button#addToCart(type='button' onclick='bag('+session.pid[5]+','+session.names[5]+')') add to cart
               img(src='white_heart.png' style='width:30; position: absolute; margin-left: 3%')
 
-          .shop-item(style='width:290px; margin-left:4%; height: 404px; margin-top: 2%; float:left')
+          .shop-item(style='margin-left:4%; margin-top: 2%')
             .image 
-              img.shop-item-image(src='/'+session.image[6] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+              img.shop-item-image(src='/'+session.image[6] alt='makeup')
             .content(style='text-align:center;')
               label#name(style='font-weight: 600') !{session.names[6]}
               label#brand !{session.brand[6]}
@@ -230,12 +180,12 @@ html(lang="en")
               if (session.quantity[6] == 0)
                 button#addToCart(type='button' ) SOLD OUT
               else
-                button#addToCart(type='button' onclick='bag('+session.pid[6]+','+session.names[6]+')' style='font-size: 20px; width: 123px; height: 33px; cursor:pointer; margin-left: 30%') add to cart
+                button#addToCart(type='button' onclick='bag('+session.pid[6]+','+session.names[6]+')') add to cart
               img(src='white_heart.png' style='width:30; position: absolute; margin-left: 3%')
 
-          .shop-item(style='width:290px; margin-left:4%; height: 404px; margin-top: 2%; float:left')
+          .shop-item(style='margin-left:4%; margin-top: 2%')
             .image 
-              img.shop-item-image(src='/'+session.image[7] alt='makeup' style='margin-left:10%; margin-top: 2%; margin-bottom: 3%; width: 250px; box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center;')
+              img.shop-item-image(src='/'+session.image[7] alt='makeup')
             .content(style='text-align:center;')
               label#name(style='font-weight: 600') !{session.names[7]}
               label#brand !{session.brand[7]}
@@ -244,7 +194,7 @@ html(lang="en")
               if (session.quantity[7] == 0)
                 button#addToCart(type='button' ) SOLD OUT
               else
-                button#addToCart(type='button' onclick='bag('+session.pid[7]+','+session.names[7]+')' style='font-size: 20px; width: 123px; height: 33px; cursor:pointer; margin-left: 30%') add to cart
+                button#addToCart(type='button' onclick='bag('+session.pid[7]+','+session.names[7]+')') add to cart
               img(src='white_heart.png' style='width:30; position: absolute; margin-left: 3%')
 
               
