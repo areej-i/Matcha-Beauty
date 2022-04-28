@@ -13,3 +13,7 @@ In the terminal, open the project folder and type npm install to update node, an
 You must sign up with an account to use the site features. Create one yourself, or use the one down below to sign in:
 username: user1
 password: 1234
+
+Some site images:
+![Screen Shot 2022-04-27 at 11 04 59 PM](https://user-images.githubusercontent.com/58537880/165668438-9873547d-851c-44fc-b875-c3926b074dbd.png)
+
