@@ -1,0 +1,69 @@
+#sidenav1
+  input#ham-menu(type='checkbox')
+  label(for='ham-menu')
+    .hide-des
+      span.menu-line
+      span.menu-line
+      span.menu-line
+      span.menu-line
+      span.menu-line
+      span.menu-line
+  .full-page-green
+  .ham-menu
+    ul.centre-text.bold-text
+      li
+        a(onclick="location.href = '../eyes';") eyes
+      li
+        a(onclick="location.href = '../lips';") lips
+      li
+        a(onclick="location.href = '../face';") face
+      li
+        a(onclick="location.href = '../bestselling';") bestselling
+      li
+        a(onclick="location.href = '../account';") my account
+      li
+        a(href='about.asp') support
+      li 
+        a(href='about.asp') contact
+
+#header(style='background-color: white; height: 160px')
+  .headTitle
+    li
+      a(onclick="location.href = '../home';") Matcha Beauty
+    #main
+      img(src='/icon-search.svg' alt='magnifying glass' style='width:2%;margin-left: 27%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+      .dropdown(style='width:2%;margin-left: 2%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+        img(src='/icon-account.svg' alt='person icon' style='margin-bottom: 12;')
+        .dropdown-content(style='font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;')
+          if (session.loggedin == true)
+            a(onclick="location.href = 'account';") my account
+            a(onclick="location.href = 'home';") log out
+          else
+            a(onclick="location.href = 'login';") login
+            a(onclick="location.href = 'register';") sign up
+      img(src='/icon-bag.svg' onclick="openNav()" alt='bag icon' style='width:2%;margin-left: 2%;padding:3px;margin-bottom: 10;margin-top: 0.9%; cursor:pointer;')
+
+    #mySidebar.sidebar
+      a.closebtn(href='javascript:void(0)' onclick='closeNav()') &times;
+      label(style='margin-left: 30%; letter-spacing: 0.15em; top: 20px; font-size: 24px; font-weight: bold; color: black; font-family: "OpenSansCondensed-Light", sans-serif;') Shopping bag
+      .cart-row
+        span.cart-item.cart-header.cart-column ITEM
+        span.cart-price.cart-header.cart-column PRICE
+        span.cart-quantity.cart-header.cart-column QUANTITY
+      .cart-items
+      .cart-total
+        strong.cart-total-title Total
+        span.cart-total-price $0
+      button.btn.btn-primary.btn-purchase(type='button') PURCHASE
+    
+  ul
+    li#list
+      a(style='cursor:pointer' onclick="location.href = '../all';") all
+    li
+      a(style='cursor:pointer' onclick="location.href = '../eyes';") eyes
+    li
+      a(style='cursor:pointer' onclick="location.href = '../lips';") lips
+    li
+      a(style='cursor:pointer' onclick="location.href = '../face';") face
+    li
+      a(style='cursor:pointer' onclick="location.href = '../bestselling';") bestselling
