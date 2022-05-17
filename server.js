@@ -3,7 +3,6 @@ const app = express();
 const fs = require('fs');
 const model = require('./businessLogic.js')
 const path = require('path');
-// const io = require('socket.io')(server)
 const pug = require('pug');
 const sqlite3 = require('sqlite3').verbose();
 
@@ -15,9 +14,9 @@ app.use(express.urlencoded({extended:true}));
 
 //Create session
 const session = require('express-session');
-//const { searchUsers } = require('./businessLogic.js');
+
 app.use(session({ 
-    cookie:{ maxAge: 1000000000000},
+    cookie:{ maxAge: 1000000000},
     secret: 'hello cat',
     resave: true,
     saveUninitialized: true
@@ -41,23 +40,11 @@ app.get('/home',(req,res)=>
 {
     res.render('home',{session:req.session});
 })
-app.get('/all',(req,res)=>{
-    res.render('all',{session:req.session});
-})
-app.get('/account',(req,res)=>
-{
-    res.render('account',{session:req.session});
-})
 app.get('/bestselling',(req,res)=>
 {
     res.render('bestselling',{session:req.session});
 })
-app.get('/lips',(req,res)=>{
-    res.render('lips',{session:req.session});
-})
-app.get('/face',(req,res)=>{
-    res.render('face',{session:req.session});
-})
+
 
 /**********************  accessing database  **********************/
 
@@ -106,6 +93,7 @@ db.all(sql, [], (err, rows) => {
         i++;
     });
 });
+
 
 var cnt = 0;
 db.all(`SELECT ccid FROM user ORDER BY username`, [], (err, rows) => {
@@ -174,7 +162,9 @@ function loginUser (req, res)
     {
         if(model.login(req.body.username, req.body.password))
         {   
-            createSession(req, res);
+            req.session.username = req.body.username;
+            req.session.loggedin = true;
+            res.status(200).redirect('/home');
         }
         else
         {   //they did not log in successfully.
@@ -186,113 +176,10 @@ function loginUser (req, res)
 app.get("/logOut", function logOut(req,res)
 {
     req.session.destroy();
-    res.redirect('/home');
+    res.redirect('/');
 })
 
 /**********************  Handling Log in  *************************/
-
-function createSession(req, res){
-    req.session.username = req.body.username;
-    req.session.loggedin = true;
-    eyesImage = [];
-    eyesNames = [];
-    eyesBrand = [];
-    eyesQuantity = [];
-    eyesPrice = [];
-    eyesPid = [];
-    favouritePid = [];
-    favouriteImage = [];
-    favName = [];
-    orderImage = [];
-    userOrders = [];
-    orderName = [];
-
-    var ccid;
-
-    var b = 0;
-    for(i = 0; i < productImage.length; i++)
-    {
-        if (productCategory[i] == 'eyes')
-        {
-            eyesImage[b] = productImage[i];
-            eyesNames[b] = productNames[i];
-            eyesBrand[b] = productBrand[i];
-            eyesPid[b] = productPid[i];
-            eyesQuantity[b] = productQuantity[i];
-            eyesPrice[b] = productPrice[i];
-            b++;
-        }
-    }
-
-    console.log(favPid)
-    console.log(favUser)
-    
-    var z = 0;
-    for(i = 0; i < favUser.length; i++)
-    {
-        if (favUser[i] == req.session.username)
-        {
-            favouritePid[z] = favPid[i];
-            z++;
-        }
-    }
-
-    var zr = 0;
-    for(i = 0; i < productImage.length; i++)
-    {
-        if (favouritePid[zr] == productPid[i])
-        {
-            favName[zr] = productNames[i];
-            favouriteImage[zr] = productImage[i];
-            zr++;
-        }
-    }
-
-    for(i = 0; i < userName.length; i++){
-        if(userName[i] == req.session.username){
-            ccid = userCCid[i];
-        }
-    }
-
-    var zt = 0;
-    for(i = 0; i < orderCcid.length; i++)
-    {
-        if (orderCcid[i] == ccid)
-        {
-            userOrders[zt] = orderPid[i]; //gets orders for the specific user
-            zt++;
-        }
-    }
-
-    userOrders.sort();
-
-    var vr = 0;
-    for(var v = 0; v < productImage.length; v++)
-    {
-        if (userOrders[vr] == productPid[v])
-        {
-            orderName[vr] = productNames[v];
-            orderImage[vr] = productImage[v]; //gets image for the specific orders
-            vr++;
-        }
-    }
-
-    req.session.orderName = orderName;
-    req.session.orderPid = orderPid;
-    req.session.orderDate = orderDate;
-    req.session.orderStatus = orderStatus;
-    req.session.ordersQuantity = orderQuantity;
-    req.session.orders = orderImage;
-    req.session.favs = favouriteImage;
-    req.session.favName = favName;
-    req.session.names = eyesNames;
-    req.session.image = eyesImage;
-    req.session.quantity = eyesQuantity;
-    req.session.price = eyesPrice;
-    req.session.pid = eyesPid;
-    req.session.brand = eyesBrand;
-    res.status(200).redirect('/home');
-}
 
 app.post('/createFav', createFav);
 function createFav (req, _res)
@@ -328,7 +215,9 @@ function signUpUser (req, res)
             ccid = ccid + 1;
             ccid = 'CC' + ccid;
             model.help(req.body.username,req.body.password,req.body.email,ccid);
-            createSession(req, res);
+            req.session.username = req.body.username;
+            req.session.loggedin = true;
+            res.status(200).redirect('/home',{session:req.session});
         }
     }
 }
@@ -337,64 +226,168 @@ function idk(_req,_res){
 }
 
 /****************************************************************/
-app.get('/eyes',(req,res)=>{
-    favouritePid = [];
-    favouriteImage = [];
-    favName = [];
-    console.log("eyes");
-    model.addToFavs();
-    favPid.push('P1');
-    favPid.sort();
-    favUser.push('user1');
-    favUser.sort();
+app.get('/all',(req,res)=>{
+    let productAmount = [];
 
-    console.log(favUser);
-    console.log(favPid);
+    for (let b = 0; b < productNames.length; b++){
+        productAmount[b] = b;
+    } 
 
-    var z = 0;
-    for(i = 0; i < favUser.length; i++)
-    {
-        if (favUser[i] == req.session.username)
-        {
-            favouritePid[z] = favPid[i];
-            z++;
-        }
-    }
-
-    console.log(favouritePid);
-
-    var zr = 0;
-    for(i = 0; i < productImage.length; i++)
-    {
-        if (favouritePid[zr] == productPid[i])
-        {
-            favName[zr] = productNames[i];
-            favouriteImage[zr] = productImage[i];
-            zr++;
-        }
-    }
-
-    favouriteImage[2] = 'IMG_4755.jpg';
-    favName[2] = 'flower highlighter';
-
-    req.session.favs = favouriteImage;
-    req.session.favName = favName;
-
-    res.render('eyes',{session:req.session});
+    res.render('all',{session:req.session,image:productImage,name:productNames,brand:productBrand,quantity:productQuantity,price:productPrice,pid:productPid,amount:productAmount});
 })
 
-app.post('/myAccount', myAccount);
-function myAccount (req, res)
-{
-    createSession(req, res);
-    // favouriteImage = req.session.favs;
-    // favouriteImage.push(productImage[0]);
-    // req.session.favs = favouriteImage;
+app.get('/eyes',(req,res)=>{
+    let eyesImage = [];
+    let eyesNames = [];
+    let eyesBrand = [];
+    let eyesPid = [];
+    let eyesQuantity = [];
+    let eyesPrice = [];
+    let eyesAmount = [];
 
-    // favName = req.session.favName;
-    // favName.push(productNames[0]);
-    // req.session.favName = favName;
-}
+
+    let b = 0;
+    for (let u in productCategory){
+        if (productCategory[u] == "eyes"){
+            eyesImage[b] = productImage[u];
+            eyesNames[b] = productNames[u];
+            eyesBrand[b] = productBrand[u];
+            eyesPid[b] = productPid[u];
+            eyesQuantity[b] = productQuantity[u];
+            eyesPrice[b] = productPrice[u];
+            eyesAmount[b] = b;
+            b++;
+        }
+    }  
+
+    res.render('eyes',{session:req.session,image:eyesImage,name:eyesNames,brand:eyesBrand,quantity:eyesQuantity,price:eyesPrice,pid:eyesPid,amount:eyesAmount});
+})
+
+app.get('/lips',(req,res)=>{
+
+    let lipsImage = [];
+    let lipsNames = [];
+    let lipsBrand = [];
+    let lipsPid = [];
+    let lipsQuantity = [];
+    let lipsPrice = [];
+    let lipsAmount = [];
+
+    let b = 0;
+    for (let u in productCategory){
+        if (productCategory[u] == "lips"){
+            lipsImage[b] = productImage[u];
+            lipsNames[b] = productNames[u];
+            lipsBrand[b] = productBrand[u];
+            lipsPid[b] = productPid[u];
+            lipsQuantity[b] = productQuantity[u];
+            lipsPrice[b] = productPrice[u];
+            lipsAmount[b] = b;
+            b++;
+        }
+    }  
+
+    res.render('lips',{session:req.session,image:lipsImage,name:lipsNames,brand:lipsBrand,quantity:lipsQuantity,price:lipsPrice,pid:lipsPid,amount:lipsAmount});
+})
+
+app.get('/face',(req,res)=>{
+
+    let faceImage = [];
+    let faceNames = [];
+    let faceBrand = [];
+    let facePid = [];
+    let faceQuantity = [];
+    let facePrice = [];
+    let faceAmount = [];
+
+    let b = 0;
+    for (let u in productCategory){
+        if (productCategory[u] == "face"){
+            faceImage[b] = productImage[u];
+            faceNames[b] = productNames[u];
+            faceBrand[b] = productBrand[u];
+            facePid[b] = productPid[u];
+            faceQuantity[b] = productQuantity[u];
+            facePrice[b] = productPrice[u];
+            faceAmount[b] = b;
+            b++;
+        }
+    }  
+
+    res.render('face',{session:req.session,image:faceImage,name:faceNames,brand:faceBrand,quantity:faceQuantity,price:facePrice,pid:facePid,amount:faceAmount});
+})
+// app.get('/account',(req,res)=>
+// {
+//     res.render('account',{session:req.session});
+// })
+app.get('/account',(req,res)=>{
+    let myFavPid = [];
+    let favImage = [];
+    let favNames = [];
+    let favPrice = [];
+    let myOrderPid = [];
+    let myOrderDate = [];
+    let myOrderImage = [];
+    let myOrderQuantity = [];
+    let myOrderStatus = [];
+    let myOrderName = [];
+    let orderAmount = [];
+    let favAmount = [];
+    let c = 0;
+    let ccid;
+    if(req.session.loggedin)
+    {   
+        for (let u in favUser){
+            if (favUser[u] == session.username){
+                myFavPid[c] = favPid[u];
+                c++;
+            }
+        }  
+
+        let d = 0;
+        for (let w in myFavPid){
+            let b = productPid.indexOf(myFavPid[w]);
+            favImage[d] = productImage[b];
+            favNames[d] = productNames[b];
+            favPrice[d] = productPrice[b];
+            favAmount[d] = d;
+            d++;
+        } 
+
+        z = userName.indexOf(session.username);
+        ccid = userCCid[z];
+
+
+        let a = 0;
+        for(let x in orderCcid){
+            if (orderCcid[x] == ccid){
+                myOrderPid[a] = orderPid[x];
+                myOrderDate[a] = orderDate[x];
+                myOrderQuantity[a] = orderQuantity[x];
+                myOrderStatus[a] = orderStatus[x];
+                orderAmount[a] = a;
+                a++;
+            }
+        }
+
+        let r = 0;
+        for(let v in productImage){
+            if (myOrderPid[r] == productPid[v]){
+                myOrderName[r] = productNames[v];
+                myOrderImage[r] = productImage[v]; //gets image for the specific orders
+                r++;
+            }
+        }
+
+        res.render('account',{session:req.session,favImage:favImage,favNames:favNames,favPrice:favPrice,orderImage:myOrderImage,
+            orderName:myOrderName,orderStatus:myOrderStatus,orderQuantity:myOrderQuantity,date:myOrderDate,orderPid:myOrderPid,
+            orderAmount:orderAmount, favAmount:favAmount});
+    }
+    else
+    {
+        res.render('login',{session:req.session});
+    }
+})
 
 
 /************************  handling checkout  ***************************/
@@ -458,12 +451,7 @@ function myAccount (req, res)
 // }
 
 /*************************************************************** */
-var server = app.listen(3000);
-
-// HTTP Keep-Alive to a short time to allow graceful shutdown
-server.on('connection', function (socket) {
-    socket.setTimeout(4 * 1000);
-});
+app.listen(3000);
 
 // close the database connection
 db.close((err) => {
@@ -475,4 +463,3 @@ db.close((err) => {
 
 
 console.log("Server listening at http://localhost:3000")
-
