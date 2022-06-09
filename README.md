@@ -1,6 +1,8 @@
 # Matcha-Beauty
 
-Online cosmetics store called Matcha Beauty. Note this is not a real store, so valid purchases cannot be made and sensitive 
+Online cosmetics store called Matcha Beauty. Users are able to browse items by category; face, lips, eyes or view all the products at once. If the user wishes to save a product, they can press the heart button to save an item. 
+
+Note this is not a real store, so valid purchases cannot be made and sensitive 
 information shouldn't be entered.
 
 Currently, this server is only able to authenticate user login/sign up and add information to its database as well as display product items in the database. Work is needed to provide other features.
