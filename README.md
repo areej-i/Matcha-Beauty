@@ -10,7 +10,9 @@ In the terminal, open the project folder and type npm install to update node, an
 
 You must sign up with an account to use the site features. Create one yourself, or use the one down below to sign in:
 username: user1
+
 password: 1234
+
 
 Note this is not a real store, so valid purchases cannot be made and sensitive information shouldn't be entered.
 
